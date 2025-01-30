@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('mnemo_schema_node_options', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('parent_id')->nullable();
+            $table->string('hardware_code')->nullable();
+            $table->string('parameter_code')->nullable();
+            $table->integer('z_index')->default(0);
+            $table->bigInteger('node_id')->unique();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('mnemo_schema_node_options');
+    }
+};

@@ -1,0 +1,9 @@
+FROM harbor.umnogor.ru/base_images/php-laravel-rr:8.3
+ARG APP_USER
+ARG WWWGROUP
+WORKDIR /var/www/html
+COPY . .
+
+RUN chown -R ${APP_USER}:${WWWGROUP} /var/www/html
+
+ENTRYPOINT [ "./entrypoint.sh" ]

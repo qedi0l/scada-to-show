@@ -1,0 +1,32 @@
+services:
+  scada-ui:
+    environment:
+      - POSTGRES_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - TEST_POSTGRES_HOST=${TEST_DB_HOST}
+      - TEST_POSTGRES_DB=${TEST_DB_DATABASE}
+      - TEST_POSTGRES_USER=${TEST_DB_USERNAME}
+      - TEST_POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
+      - METRIC_CATALOG_HOST=${METRIC_CATALOG_HOST}
+      - PHP_ENABLE_XDEBUG=1
+
+  pgsql-test:
+    image: harbor.umnogor.ru/base_images/postgres:16.2
+    container_name: postgresql-test
+    environment:
+      POSTGRES_DB: ${TEST_DB_DATABASE}
+      POSTGRES_PASSWORD: ${TEST_DB_PASSWORD}
+      POSTGRES_USER: ${TEST_DB_USERNAME}
+      SERVICE_TAGS: test
+      SERVICE_NAME: test-pgsql
+    volumes:
+      - postgres_test_laravel:/var/lib/postgresql/data
+    ports:
+      - "5445:5432"
+    networks:
+      - sail
+
+volumes:
+    postgres_test_laravel:

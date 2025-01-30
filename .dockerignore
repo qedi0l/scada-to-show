@@ -1,0 +1,10 @@
+.env.example
+.env.testing
+.git
+.gitignore
+.gitattributes
+.dockerignore
+docker-compose.*
+Dockerfile*
+/Protobuf/ProtosGenerated/
+/Protobuf/GPBMetadata/
